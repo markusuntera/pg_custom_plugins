@@ -1,0 +1,10 @@
+bin/
+build/
+
+# VSCode specific
+.vscode/
+
+# Mac specific
+.DS_Store
+
+**/*.o
