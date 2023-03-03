@@ -1,7 +1,5 @@
 #include "postgres.h"
 #include "fmgr.h"
-//#include "funcapi.h"
-//#include "catalog/pg_type.h"
 #include "utils/builtins.h"
 
 #include <proj.h>
@@ -49,7 +47,7 @@ Datum get_grid_convergence(PG_FUNCTION_ARGS)
         b = proj_trans(P, PJ_FWD, a);
         //printf("lat/lon: %.6f, %.6f\n", b.enu.e, b.enu.n);
 
-        P2 = proj_create(C, epsg);
+        P2 = proj_get_source_crs(C, P);
         if (0 == P2) {
             elog(ERROR, "Failed to create transformation object.\n");
             PG_RETURN_NULL();
@@ -69,7 +67,7 @@ Datum get_grid_convergence(PG_FUNCTION_ARGS)
 	}
 	else
 	{
-		elog(ERROR, "LWGEOM_makepoint: unsupported number of args: %d", PG_NARGS());
+		elog(ERROR, "st_convergence: unsupported number of args: %d", PG_NARGS());
 		PG_RETURN_NULL();
 	}
 
