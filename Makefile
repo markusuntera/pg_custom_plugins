@@ -12,11 +12,11 @@ LIBS     = -L/usr/local/lib/
 #INCLUDE  = -I/usr/local/include/ -I/usr/local/include/postgresql/server
 INCLUDE  = -I/usr/local/include/ -I/Applications/Postgres.app/Contents/Versions/13/include/postgresql/server/
 
-all: pg_custom_plugins
+all: pg_eyevigis
 
-pg_custom_plugins: src/pg_custom_plugins.o 
+pg_eyevigis: src/pg_eyevigis.o 
 	mkdir -p bin
-	${LINKER} ${COPTS} src/pg_custom_plugins.o -lproj -o bin/$@.so ${LIBS} $(INCLUDE)
+	${LINKER} ${COPTS} src/pg_eyevigis.o -lproj -o bin/$@.so ${LIBS} $(INCLUDE)
 
 .c.o: 
 	${COMPILER} -c ${INCLUDE} $< -o $@
